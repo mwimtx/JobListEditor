@@ -39,6 +39,7 @@
             <dac_val>0</dac_val>
             <dac_on>0</dac_on>
             <input>0</input>
+            <direct_mode>0</direct_mode>
             <input_divider>0</input_divider>
           </channel>
           <channel id="6">
@@ -51,6 +52,7 @@
             <dac_val>0</dac_val>
             <dac_on>0</dac_on>
             <input>0</input>
+            <direct_mode>0</direct_mode>
             <input_divider>0</input_divider>
           </channel>
           <channel id="7">
@@ -63,6 +65,7 @@
             <dac_val>0</dac_val>
             <dac_on>0</dac_on>
             <input>0</input>
+            <direct_mode>0</direct_mode>
             <input_divider>1</input_divider>
           </channel>
           <channel id="8">
@@ -75,6 +78,7 @@
             <dac_val>0</dac_val>
             <dac_on>0</dac_on>
             <input>0</input>
+            <direct_mode>0</direct_mode>
             <input_divider>1</input_divider>
           </channel>
           <channel id="9">
@@ -87,6 +91,7 @@
             <dac_val>0</dac_val>
             <dac_on>0</dac_on>
             <input>0</input>
+            <direct_mode>0</direct_mode>
             <input_divider>1</input_divider>
           </channel>
         </channel_config>
