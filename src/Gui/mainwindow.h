@@ -10,7 +10,8 @@
 #include "comparejoblists.h"
 
 
-#define SVN_REVISION_STRING  "$Revision: 145 $"
+// no automatic update of version number anymore - must be updated manually
+#define SVN_REVISION_STRING  "$Revision: 146 $"
 
 // constants and defines
 

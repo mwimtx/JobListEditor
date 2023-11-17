@@ -1353,6 +1353,7 @@ void Job::updateChannelConfigTag()
             newChannelTag.appendChild( Tools::createTextElement( mJobDocument, "dac_val"     , (*it)  -> getDacVal() ) );
             newChannelTag.appendChild( Tools::createTextElement( mJobDocument, "dac_on"      , (*it)  -> getDacOn() ) );
             newChannelTag.appendChild( Tools::createTextElement( mJobDocument, "input"       , (*it)  -> getInputSelection() ) );
+            newChannelTag.appendChild( Tools::createTextElement( mJobDocument, "direct_mode" , "0" ) );
 
             QString sensorType    = mDataModel -> getSensorHWSensorTypeInputAtChannel( (*it) -> getChannelId() );
             QString input_divider = this->getInputDivForSensor (sensorType);
