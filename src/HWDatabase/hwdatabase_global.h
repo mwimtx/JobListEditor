@@ -1,0 +1,12 @@
+#ifndef HWDATABASE_GLOBAL_H
+#define HWDATABASE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(HWDATABASE_LIBRARY)
+#  define HWDATABASESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define HWDATABASESHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // HWDATABASE_GLOBAL_H

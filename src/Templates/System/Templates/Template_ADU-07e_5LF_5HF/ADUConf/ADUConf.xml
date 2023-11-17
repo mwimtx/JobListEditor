@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ADUConf>
+  <!-- set this node to the path inside the ADU-07 system, the USB device shall be mounted to.
+         making it empty does not mount the device.
+         to use an external USB device set this node to
+         /mtdata/usb/data1 or /mtdata/usb/data2 -->
+  <TargetDirectory/>
+  <!-- set this node to "relative" to start all jobs of the job-list at the next possible time.
+         setting the nodes value to "absolute" will not update start-/stop times.
+         setting the nodes value to "adjusted" will shift the complete job-list to the new
+         start-time defined in "start_time" and "start_date" nodes
+         setting the nodes value to "grid" you may enter a time grid the joblist shall be started
+         on (e.g. set start_time to 00:15:00 means start joblist at next full 15 minutes - Example:
+         time now: 08:37:42 / start_time: 00:15:00 / resulting joblist start-time: 08:45:00
+         time now: 09:02:13 / start_time: 00:15:00 / resulting joblist start-time: 09:15:00
+         ... ).
+         do not enter any value for the "TimeOffset" node
+         all time values are UTC-->
+  <TimeFormat>adjusted</TimeFormat>
+  <TimeOffset>0</TimeOffset>
+  <start_time>00:00:00</start_time>
+  <start_date>2000-01-01</start_date>
+  <!-- this node configures the data storage mode for the jobs of the job-list. use the following 
+         values:
+         USB_TO_USB: store all data recorded by the job-list on this USB device
+         USB_TO_DEFAULT: store all data to the ADU-07 internal CF-card "/mtdata/data"
+         USB_TO_JOB: use the path of the "target_directory" node from the XML job file
+    -->
+  <StorageMode>USB_TO_DEFAULT</StorageMode>
+  <!-- set this nodes value to "TRUE" to replace the site configuration (comments, ...)
+         to the values that are currently active on the ADU system. If being set to FALSE
+         the values of the joblist will be used.
+      -->
+  <AdaptConfig>FALSE</AdaptConfig>
+  <!-- Set this value to TRUE to use the values currently stored inside the ADU for the
+         sensor spacing for the joblist. If beeing set to FALSE the sensor spacing values of
+         the joblist will be used.
+      -->
+  <AdaptSensorSpacing>FALSE</AdaptSensorSpacing>
+  <!-- Set this value to E_SERIES to overwrite the sensor config (type and serial) for all
+         intelligent sensors (MFS07e, MFS06e, ...) with the information that has been detected
+         during boot. This should be the default.
+         Set this value to ALL to replace all the sensor config inside the joblist with the
+         currently used values of the ADU (Webinterface).
+         Set this value to NONE to use the sensor config of the joblist and ignore all 
+         currently used ADU settings.
+      -->
+  <AdaptSensorType>E_SERIES</AdaptSensorType>
+  <!-- set this nodes value to "TRUE" to replace the channel configuration settings for gains
+         and DC offset correction with the settings that have been detected, using the "AutoGain
+         AutoOffset" functionality (either via Webinterface or special joblist jobs.)
+    -->
+  <AdaptChannelConfig>FALSE</AdaptChannelConfig>
+  <!-- set this nodes value to "TRUE" to clean up the "jobs" table before transferring the job-list
+         to the ADU-07 database -->
+  <CleanJobTable>FALSE</CleanJobTable>
+  <!-- This finally is the job-list. create one entry for each job of the job-list. -->
+  <JobList>
+    <Job id="0">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/4Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="1">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/16Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="2">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/32Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="3">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/64Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="4">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/512Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="5">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/4096Hz.xml</TargetDirectory>
+    </Job>
+    <Job id="6">
+      <TargetDirectory>/JLE_Template_ADU-07e_5LF_5HF/524288Hz.xml</TargetDirectory>
+    </Job>
+  </JobList>
+</ADUConf>
+

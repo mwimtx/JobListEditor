@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ADU07Conf>
+  <!-- set this node to the path inside the ADU-07 system, the USB device shall be mounted to.
+         making it empty does not mount the device.
+         to use an external USB device set this node to
+         /mtdata/usb/data1 or /mtdata/usb/data2 -->
+  <TargetDirectory/>
+  <!-- set this node to "relative" to start all jobs of the job-list at the next possible time.
+         setting the nodes value to "absolute" will not update start-/stop times.
+         setting the nodes value to "adjusted" will shift the complete job-list to the new
+         start-time defined in "start_time" and "start_date" nodes
+         setting the nodes value to "grid" you may enter a time grid the joblist shall be started
+         on (e.g. set start_time to 00:15:00 means start joblist at next full 15 minutes - Example:
+         time now: 08:37:42 / start_time: 00:15:00 / resulting joblist start-time: 08:45:00
+         time now: 09:02:13 / start_time: 00:15:00 / resulting joblist start-time: 09:15:00
+         ... ).
+         do not enter any value for the "TimeOffset" node
+         all time values are UTC-->
+  <TimeFormat>adjusted</TimeFormat>
+  <TimeOffset>0</TimeOffset>
+  <start_time>12:01:30</start_time>
+  <start_date>2013-04-18</start_date>
+  <!-- this node configures the data storage mode for the jobs of the job-list. use the following 
+         values:
+         USB_TO_USB: store all data recorded by the job-list on this USB device
+         USB_TO_DEFAULT: store all data to the ADU-07 internal CF-card "/mtdata/data"
+         USB_TO_JOB: use the path of the "target_directory" node from the XML job file
+    -->
+  <StorageMode>USB_TO_DEFAULT</StorageMode>
+  <!-- set this nodes value to "TRUE" to replace the configuration settings for "sensor type",
+         "sensor name", "sensor serial" and "sensor position" with either the configuration of
+         the last started job from the Webinterface or if available inside the system, of the
+         automatically detected sensors. leaving it at "FALSE" will not update the config settings
+    -->
+  <AdaptConfig>TRUE</AdaptConfig>
+  <!-- set this nodes value to "TRUE" to replace the channel configuration settings for gains
+         and DC offset correction with the settings that have been detected, using the "AutoGain
+         AutoOffset" functionality (either via Webinterface or special joblist jobs.)
+    -->
+  <AdaptChannelConfig>FALSE</AdaptChannelConfig>
+  <!-- set this nodes value to "TRUE" to clean up the "jobs" table before transferring the job-list
+         to the ADU-07 database -->
+  <CleanJobTable>TRUE</CleanJobTable>
+  <!-- This finally is the job-list. create one entry for each job of the job-list. -->
+  <JobList>
+    <Job id="0">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_1Hz_64s_64s.xml</TargetDirectory>
+    </Job>
+    <Job id="1">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_8Hz_64s_64s.xml</TargetDirectory>
+    </Job>
+    <Job id="2">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_16Hz_64s_64s.xml</TargetDirectory>
+    </Job>
+    <Job id="3">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_32Hz_64s_64s.xml</TargetDirectory>
+    </Job>
+    <Job id="4">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_64Hz_32s_32s.xml</TargetDirectory>
+    </Job>
+    <Job id="5">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_128Hz_32s_32s.xml</TargetDirectory>
+    </Job>
+    <Job id="6">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_256Hz_32s_32s.xml</TargetDirectory>
+    </Job>
+    <Job id="7">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_512Hz_32s_32s.xml</TargetDirectory>
+    </Job>
+    <Job id="8">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_1024Hz_16s_16s.xml</TargetDirectory>
+    </Job>
+    <Job id="9">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_2048Hz_16s_16s.xml</TargetDirectory>
+    </Job>
+    <Job id="10">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_4096Hz_16s_16s.xml</TargetDirectory>
+    </Job>
+    <Job id="11">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_8192Hz_16s_16s.xml</TargetDirectory>
+    </Job>
+    <Job id="12">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_1Hz_64s_64s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="13">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_8Hz_64s_64s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="14">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_16Hz_64s_64s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="15">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_32Hz_64s_64s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="16">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_64Hz_32s_32s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="17">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_128Hz_32s_32s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="18">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_256Hz_32s_32s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="19">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_512Hz_32s_32s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="20">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_1024Hz_16s_16s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="21">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_2048Hz_16s_16s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="22">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_4096Hz_16s_16s_cyclic.xml</TargetDirectory>
+    </Job>
+    <Job id="23">
+      <TargetDirectory>/tx_full_day_run/csamt_tensor_8192Hz_16s_16s_cyclic.xml</TargetDirectory>
+    </Job>
+  </JobList>
+</ADU07Conf>
+

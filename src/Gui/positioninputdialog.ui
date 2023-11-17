@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PositionInputDialog</class>
+ <widget class="QDialog" name="PositionInputDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>305</width>
+    <height>146</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Position</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pbToggleSign">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLineEdit" name="leInput">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pbReject">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="jle_resources.qrc">
+       <normaloff>:/icons/Resources/pic/Button_NOK.png</normaloff>:/icons/Resources/pic/Button_NOK.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pbAccept">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="jle_resources.qrc">
+       <normaloff>:/icons/Resources/pic/Button_OK.png</normaloff>:/icons/Resources/pic/Button_OK.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>leInput</tabstop>
+  <tabstop>pbAccept</tabstop>
+  <tabstop>pbToggleSign</tabstop>
+  <tabstop>pbReject</tabstop>
+ </tabstops>
+ <resources>
+  <include location="jle_resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pbAccept</sender>
+   <signal>clicked()</signal>
+   <receiver>PositionInputDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>61</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbReject</sender>
+   <signal>clicked()</signal>
+   <receiver>PositionInputDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>180</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>61</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

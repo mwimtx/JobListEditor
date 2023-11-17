@@ -1,0 +1,27 @@
+QWidget {
+        font: bold 10pt;
+}
+
+QLineEdit {
+        font: bold 10pt "Bitstream Terminal";
+}
+
+QDialog > QLineEdit { }
+
+QPushButton {
+        min-height:45px;
+        font: bold 10pt;
+}
+
+QDialog#KeypadNew > QLineEdit {
+        font: bold 14pt "Bitstream Terminal" ;
+}
+
+QDialog#KeypadFree > QLineEdit {
+        font: bold 14pt "Bitstream Terminal" ;
+}
+
+QDialog > QPushButton {
+        min-height: 50px;
+        font: bold 10pt;
+}

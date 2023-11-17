@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# create directory for system status files
+ADU_SN=$(expr substr $(cat /home/startW-Lan | grep "C_ESSID=") 9 7)
+strDat=$(date +%Y-%m-%d_%H-%M-%S)
+strDir=$ADU_SN.$strDat
+
+mkdir $2/$strDir
+
+# dump mysql database to USB
+/home/mtx-check-database -dump $2/$strDir/mcpdb07.sql
+
+# dump free disk space to USB
+df > $2/$strDir/FreeDiskSpace.txt
+
+# dump kernel messages to USB
+dmesg > $2/$strDir/KernelMessages.txt
+
+# dump ADU data
+cp -R /mtdata/data/meas* $2/$strDir
+
+# sync USB
+sync
+
+echo "0"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<event>
+  <recording>
+    <start_time>00:05:15</start_time>
+    <stop_time>00:05:30</stop_time>
+    <start_date>2000-01-01</start_date>
+    <stop_date>2000-01-01</stop_date>
+    <CyclicEvent>0</CyclicEvent>
+    <Cycle>60</Cycle>
+    <Granularity>seconds</Granularity>
+  </recording>
+  <EventType>15</EventType>
+  <EventParameter>/mtdata/usb/data1/Scripts/DumpAutoGainAutoOffset.sh /mtdata/usb/data1</EventParameter>
+</event> 

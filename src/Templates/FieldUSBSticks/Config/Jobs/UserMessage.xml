@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<set_PHP_info>
+  <recording>
+    <start_time>00:06:00</start_time>
+    <stop_time>00:06:01</stop_time>
+    <start_date>2000-01-01</start_date>
+    <stop_date>2000-01-01</stop_date>
+    <CyclicEvent>0</CyclicEvent>
+    <Cycle>60</Cycle>
+    <Granularity>seconds</Granularity>
+  </recording>
+  <command>writeLogMsg</command>
+  <MainIndex>16</MainIndex>
+  <SubIndex>1</SubIndex>
+  <ExtraMsg>Config Stick Finished!</ExtraMsg>
+</set_PHP_info>
+ 

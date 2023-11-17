@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# create directory for system status files
+strDir="SystemStatusDump_$(date +%Y-%m-%d_%H-%M-%S)"
+mkdir $2/$strDir
+
+# delete old files, if exist
+rm -R $2/$strDir/*
+
+# dump mysql database to USB
+/home/mtx-check-database -dump $2/$strDir/mcpdb07.sql
+
+# dump kernel messages to USB
+dmesg > $2/$strDir/dmesg.txt
+
+# dump process list to USB
+ps > $2/$strDir/ps.txt
+
+# dump memory usage to USB
+atop -m 1 1 > $2/$strDir/atop-m.txt
+
+# dump CPU usage to USB
+atop -s 1 1 > $2/$strDir/atop-s.txt
+
+# dump actually mounted devices
+mount > $2/$strDir/mount.txt
+
+# read all files from the usb data directories
+ls -al -r /mtdata/usb/data > $2/$strDir/filesUSBData.txt
+ls -al -r /mtdata/usb/data1 > $2/$strDir/filesUSBData1.txt
+ls -al -r /mtdata/usb/data2 > $2/$strDir/filesUSBData2.txt
+
+# sync and unmount USB
+sync
+umount $2
+sync
+
+echo "0"

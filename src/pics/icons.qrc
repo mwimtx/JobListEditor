@@ -1,0 +1,43 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>Button_Checked.png</file>
+        <file>Button_Clear.png</file>
+        <file>Button_Disable.png</file>
+        <file>Button_Edit.png</file>
+        <file>Button_Enab.png</file>
+        <file>Button_New.png</file>
+        <file>Button_NOK.png</file>
+        <file>Button_OK.png</file>
+        <file>Button_ElectrodeArrangement_Complex.png</file>
+        <file>Button_ElectrodeArrangement_Free.png</file>
+        <file>Button_ElectrodeArrangement_RotatingDipole.png</file>
+        <file>Button_PolRotating.png</file>
+        <file>Button_Reset_Error.png</file>
+        <file>Button_ShiftDown.png</file>
+        <file>Button_ShiftLeft.png</file>
+        <file>Button_ShiftLeftLeft.png</file>
+        <file>Button_ShiftLeftSmall.png</file>
+        <file>Button_ShiftRight.png</file>
+        <file>Button_ElectrodeArrangement_Simple.png</file>
+        <file>Button_PolEastWedt.png</file>
+        <file>Button_PolNorthSouth.png</file>
+        <file>Button_ShiftRightRight.png</file>
+        <file>Button_ShiftUp.png</file>
+        <file>Button_ShowXML.png</file>
+        <file>Button_StartNow.png</file>
+        <file>Button_StopAllJobs.png</file>
+        <file>Button_Stop.png</file>
+        <file>Button_StopCurrentJob.png</file>
+        <file>Button_Submit.png</file>
+        <file>Button_UnChecked.png</file>
+        <file>Button_MotorIdentification.png</file>
+        <file>MTX-22_Icon.png</file>
+        <file>Button_Save.PNG</file>
+        <file>Button_Export.PNG</file>
+        <file>Button_Import.PNG</file>
+        <file>Button_Add.PNG</file>
+        <file>Butt_DipoleCorr_Activate.png</file>
+        <file>Butt_DipoleCorr_Deactivate.png</file>
+        <file>Button_ShutdownSystem.png</file>
+    </qresource>
+</RCC>

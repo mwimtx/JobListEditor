@@ -1,0 +1,9 @@
+Projekt-Kürzel:   JLE
+Auftraggeber:     Metronix
+Projektleiter:    Dr. Michael Kaps
+Mitarbeiter:      Christoph Kliemt
+-------------------------------------------------------------------------------
+Entwicklungsumgebung
+Betriebssystem:	  OS-unabhänigig
+Compiler:	      gcc (GCC) 4.7.3 / mingw unter windows(?)
+Qt-Version:       qt-4.8.4

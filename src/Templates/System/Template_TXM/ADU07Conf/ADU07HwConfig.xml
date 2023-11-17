@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ADU07HwConfig>
+
+  <CpuInfo>
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 5
+model		: 10
+model name	: Geode(TM) Integrated Processor by AMD PCS
+stepping	: 2
+microcode	: 0x88a93d
+cpu MHz		: 498.119
+cache size	: 128 KB...
+</CpuInfo>
+
+  <MemInfo>
+MemTotal:         226592 kB
+MemFree:          153860 kB
+Buffers:            5428 kB
+Cached:            40364 kB
+SwapCached:            0 kB
+Active:            33184 kB
+Inactive:          29672 ...
+</MemInfo>
+
+  <Version>1.0</Version>
+
+  <AdbBoards>
+    <channel id="0">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="1">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1232820098</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="2">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1232820169</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="3">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1143820052</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="4">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1232820161</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="5">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1143821011</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="6">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1128820642</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="7">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1143821014</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="8">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1143821017</Serial>
+      <Type>12</Type>
+    </channel>
+    <channel id="9">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1143821012</Serial>
+      <Type>12</Type>
+    </channel>
+  </AdbBoards>
+
+  <Board id="1">
+    <GMS>7</GMS>
+    <RevMain>2</RevMain>
+    <RevSub>1</RevSub>
+    <Serial>1129820051</Serial>
+    <Type>1</Type>
+  </Board>
+
+  <Board id="102">
+    <GMS>0</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>0</Serial>
+    <Type>102</Type>
+  </Board>
+
+  <Board id="2">
+    <GMS>7</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>1</RevSub>
+    <Serial>1141820031</Serial>
+    <Type>2</Type>
+  </Board>
+
+  <Board id="4">
+    <GMS>7</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1133820434</Serial>
+    <Type>4</Type>
+  </Board>
+
+  <Board id="5">
+    <GMS>7</GMS>
+    <RevMain>2</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1130820291</Serial>
+    <Type>5</Type>
+  </Board>
+
+  <Board id="6">
+    <GMS>7</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1132820506</Serial>
+    <Type>6</Type>
+  </Board>
+
+  <Device>
+    <GMS>7</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>203</Serial>
+    <Type>20</Type>
+  </Device>
+
+  <Sensors>
+    <channel id="0">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="1">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="2">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="3">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="4">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="5">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="6">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="7">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="8">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="9">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+  </Sensors>
+
+  <Software>
+    <FpgaVersion>3.12 - (22.2.2011)</FpgaVersion>
+    <McpVersion>3.0.100000.0.723</McpVersion>
+    <MicroVersion>3.0.0.1.193</MicroVersion>
+    <UsbVersion>3.0.100000.1.117</UsbVersion>
+  </Software>
+
+</ADU07HwConfig>
+ 

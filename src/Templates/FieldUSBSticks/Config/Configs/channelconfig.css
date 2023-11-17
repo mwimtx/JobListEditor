@@ -1,0 +1,39 @@
+
+ADU07ChannelConfig {
+  background-color: #4e8975; 
+}
+Version:before { content: "Version: " }
+ci_date:before {content: "Date: " }
+ci_time:before { content: "Time(UTC): " }
+Latitude:before {content: "Latitude: " }
+Longitude:before {content: "Longitude: " }
+
+
+channel { 
+    font-weight:bold; 
+    white-space:pre; 
+    padding: 3;
+    width: 150;
+    padding-top: 5;
+    padding-bottom: 15;
+    position: relative;
+    background-color: #E0E0E0;
+    display: block;
+ }
+
+channel:before { background-color: #6698ff; content: "channel :  " attr(id) }
+
+gain_stage1:before {content: "gain_stage1:   " }
+gain_stage2:before {content: "gain_stage2:   " }
+Settings:before { background-color: #f75d59; content: "Settings :  INPUT >>> " attr(input) " <<<   " attr(input_circuitry) "  Filter:   " attr(filter_type) }
+dac_val:before {content: "dac_val:   " }
+dac_on:before {content: "dac_on:   " }
+filter_type:before {content: "Radio Filter:  " }
+
+
+LimitValues { 
+      visibility: hidden;
+ }
+Board { 
+      visibility: hidden;
+ }

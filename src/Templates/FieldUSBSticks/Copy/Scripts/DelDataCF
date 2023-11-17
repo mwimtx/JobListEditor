@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# delete data from CF flash
+rm -R /mtdata/data/meas*
+
+# sync and unmount USB
+sync
+umount $2
+sync
+
+echo "0"

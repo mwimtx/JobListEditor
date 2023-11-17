@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ADU07Conf>
+  <!-- set this node to the path inside the ADU-07 system, the USB device shall be mounted to.
+         making it empty does not mount the device.
+         to use an external USB device set this node to
+         /mtdata/usb/data1 or /mtdata/usb/data2 -->
+  <TargetDirectory>/mtdata/usb/data2</TargetDirectory>
+
+  <!-- set this node to "relative" to start all jobs of the job-list at the next possible time.
+         setting the nodes value to "absolute" will not update start-/stop times.
+         setting the nodes value to "adjusted" will shift the complete job-list to the new
+         start-time defined in "start_time" and "start_date" nodes
+         setting the nodes value to "grid" you may enter a time grid the joblist shall be started
+         on (e.g. set start_time to 00:15:00 means start joblist at next full 15 minutes - Example:
+         time now: 08:37:42 / start_time: 00:15:00 / resulting joblist start-time: 08:45:00
+         time now: 09:02:13 / start_time: 00:15:00 / resulting joblist start-time: 09:15:00
+         ... ).
+         do not enter any value for the "TimeOffset" node
+         all time values are UTC-->
+  <TimeFormat>relative</TimeFormat>
+  <TimeOffset>0</TimeOffset>
+  <start_time>00:05:00</start_time>
+  <start_date>0000-00-00</start_date>
+
+  <!-- this node configures the data storage mode for the jobs of the job-list. use the following
+         values:
+         USB_TO_USB: store all data recorded by the job-list on this USB device
+         USB_TO_DEFAULT: store all data to the ADU-07 internal CF-card "/mtdata/data"
+         USB_TO_JOB: use the path of the "target_directory" node from the XML job file
+    -->
+  <StorageMode>USB_TO_USB</StorageMode>
+
+  <!-- set this nodes value to "TRUE" to replace the configuration settings for "sensor type",
+         "sensor name", "sensor serial" and "sensor position" with either the configuration of
+         the last started job from the Webinterface or if available inside the system, of the
+         automatically detected sensors. leaving it at "FALSE" will not update the config settings
+    -->
+  <AdaptConfig>FALSE</AdaptConfig>
+
+  <!-- set this nodes value to "TRUE" to replace the channel configuration settings for gains
+         and DC offset correction with the settings that have been detected, using the "AutoGain
+         AutoOffset" functionality (either via Webinterface or special joblist jobs.)
+    -->
+  <AdaptChannelConfig>FALSE</AdaptChannelConfig>
+
+  <!-- set this nodes value to "TRUE" to clean up the "jobs" table before transferring the job-list
+         to the ADU-07 database -->
+  <CleanJobTable>FALSE</CleanJobTable>
+
+  <!-- This finally is the job-list. create one entry for each job of the job-list. -->
+  <JobList>
+    <!-- no jobs configured -->
+  </JobList>
+
+  <!-- This finally is the script-list. create one entry for each script of the script-list. The
+       single scripts are executed in the order of the "id" attribute values-->
+  <ScriptList>
+    <Script id="0">
+      <Type>custom</Type>
+      <TargetDirectory>/Scripts</TargetDirectory>
+      <Command>CopyDataToUSB</Command>
+      <!-- first options are reserved for system generated options -->
+      <Options></Options>
+      <!-- last options are reserved for system generated options -->
+    </Script>
+  </ScriptList>
+
+</ADU07Conf>
+
