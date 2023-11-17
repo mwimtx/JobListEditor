@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<HwConfig Type="1" Version="2.0" Name="ADU-08e" GMS="8">
+  <CpuInfo>
+processor	: 0
+model name	: ARMv7 Processor rev 10 (v7l)
+BogoMIPS	: 7.54
+Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpd32 
+CPU implementer	: 0x41
+CPU architecture: 7
+CPU variant	: 0...
+</CpuInfo>
+  <MemInfo>
+MemTotal:        1018464 kB
+MemFree:          814628 kB
+MemAvailable:     861228 kB
+Buffers:            2576 kB
+Cached:            52432 kB
+SwapCached:            0 kB
+Active:            79708 ...
+</MemInfo>
+  <AdbBoards>
+    <channel id="0">
+      <GMS>8</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1646821439</Serial>
+      <Type>13</Type>
+    </channel>
+    <channel id="1">
+      <GMS>8</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1646821438</Serial>
+      <Type>13</Type>
+    </channel>
+    <channel id="2">
+      <GMS>8</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1646821442</Serial>
+      <Type>13</Type>
+    </channel>
+    <channel id="3">
+      <GMS>8</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1646821441</Serial>
+      <Type>13</Type>
+    </channel>
+    <channel id="4">
+      <GMS>8</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>1646821443</Serial>
+      <Type>13</Type>
+    </channel>
+    <channel id="5">
+      <GMS>0</GMS>
+      <RevMain>0</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>255</Type>
+    </channel>
+  </AdbBoards>
+  <Board id="1">
+    <GMS>8</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1645821309</Serial>
+    <Type>1</Type>
+  </Board>
+  <Board id="106">
+    <GMS>0</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>0</Serial>
+    <Type>106</Type>
+  </Board>
+  <Board id="4">
+    <GMS>8</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1729821765</Serial>
+    <Type>4</Type>
+  </Board>
+  <Board id="5">
+    <GMS>8</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1736820005</Serial>
+    <Type>5</Type>
+  </Board>
+  <Device>
+    <GMS>8</GMS>
+    <RevMain>1</RevMain>
+    <RevSub>0</RevSub>
+    <Serial>1</Serial>
+    <Type>1</Type>
+  </Device>
+  <Sensors>
+    <channel id="0">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="1">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="2">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="3">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="4">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+    <channel id="5">
+      <GMS>7</GMS>
+      <RevMain>1</RevMain>
+      <RevSub>0</RevSub>
+      <Serial>0</Serial>
+      <Type>203</Type>
+    </channel>
+  </Sensors>
+  <Software>
+    <CLK-MCP>1.1.100000.1.117</CLK-MCP>
+    <CPU-MCP>1.0.0.100000.189</CPU-MCP>
+    <Date>$Date: 2017-11-16 14:46:08 +0100 (Thu, 16 Nov 2017) $</Date>
+    <FpgaVersion></FpgaVersion>
+    <McpVersion>1.0.0.100000.189</McpVersion>
+    <MicroVersion></MicroVersion>
+    <UsbVersion></UsbVersion>
+    <AdbBoards>
+      <channel id="0">
+        <ADB-MCP>1.0.100000.1.78</ADB-MCP>
+      </channel>
+      <channel id="1">
+        <ADB-MCP>1.0.100000.1.78</ADB-MCP>
+      </channel>
+      <channel id="2">
+        <ADB-MCP>1.0.100000.1.78</ADB-MCP>
+      </channel>
+      <channel id="3">
+        <ADB-MCP>1.0.100000.1.78</ADB-MCP>
+      </channel>
+      <channel id="4">
+        <ADB-MCP>1.0.100000.1.78</ADB-MCP>
+      </channel>
+      <channel id="5">
+        <ADB-MCP></ADB-MCP>
+      </channel>
+    </AdbBoards>
+  </Software>
+</HwConfig>
