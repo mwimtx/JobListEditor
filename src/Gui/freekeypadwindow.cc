@@ -135,8 +135,6 @@ void KeypadFreeTxmClass::checkState()
 {
         QString buttons("0123456789");
 
-        qDebug () << "buttons: " << qstrInput;
-
         if (!bInteger && !qstrInput.contains('.'))
                 buttons += '.';
         if (bSign && qstrInput.isEmpty())
@@ -149,8 +147,6 @@ void KeypadFreeTxmClass::checkState()
 
 void KeypadFreeTxmClass::keyPress(QChar key)
 {
-    qDebug () << "keyPress: " << key;
-
     switch (key.toLatin1()) {
         case 'B':
                 qstrInput.resize(qstrInput.length()-1);

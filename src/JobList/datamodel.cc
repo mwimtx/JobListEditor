@@ -39,8 +39,6 @@ struct UpdateJobData
     {
         int pauseDuration = 0;
 
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] adjust mode:" << mAdjustMode;
-
         if (mAdjustMode == ControlData::AdjustAuto)
         {
             switch (job->getMeasurementMode())
@@ -103,7 +101,6 @@ struct UpdateJobData
         job->setStartDateTime(mNewStart);
         duration.addSeconds(durationOfPauseInSeconds(job));
         mNewStart = mNewStart.addSecs(duration.asSeconds()); ; // QDateTime does not have a addMinutes for unkown reasons.
-
         #ifdef DEBUG_OUTPUT
             std::cout << __PRETTY_FUNCTION__ << " : mNewStart : " << mNewStart.toString().toStdString()
               << " "
@@ -131,12 +128,12 @@ DataModel::DataModel() :
     mJobListModel( 0 ),
     mSelectionModel( 0 ),
     mJobListDocument( "JobList" ),
-    mIsReady( false ),
-    mJobListStartTimeChanged( false ),
     eJoblistMode (C_JOBLIST_MODE_INV),
+    mJobListStartTimeChanged( false ),
     mAdjustToMinute( false ),
     mAdjustMode( ControlData::AdjustIsOff ),
-    mJobSelecteionUsesGuiSelectionModel( true ) // we'd change this value only in debug mode. in an ideal world, we'd supply a "selection factory" here...
+    mJobSelecteionUsesGuiSelectionModel( true ), // we'd change this value only in debug mode. in an ideal world, we'd supply a "selection factory" here...
+    mIsReady( false )
 {
     mJobList.clear();
 }
@@ -151,8 +148,6 @@ void DataModel::loadAndParseJobListFile(const QString & fileName )
     setIsReady( false );
     mJobListFileInfo = fileName;
     QFile jobXmlFile( mJobListFileInfo.canonicalFilePath() );
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Filename : " << fileName;
 
     mJobListStartTimeChanged = false;
     
@@ -194,11 +189,8 @@ void DataModel::loadAndParseHwData( const QDir& dir )
     mHardwareConfig.clear();
     mHwDb.clear();
 
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] HW database dir:" << dir.canonicalPath();
     fflush (stdout);
     fflush (stderr);
-
 
     QFileInfo hwDbFileName ( dir , DefaultValues::HwDatabaseFile );
     QFile hwDbFile ( hwDbFileName.absoluteFilePath() );
@@ -410,17 +402,9 @@ void DataModel::loadJobFiles()
     
     walker.assertElementName( "ADUConf" );
 
-    #ifdef DEBUG_OUTPUT
-    std::cout << __PRETTY_FUNCTION__ << " walker : " << walker.getCurrentElementNameStd() << std::endl;
-    #endif
-
     walker
         .goToFirstChild( "JobList" )
         .goToFirstChild( "Job" );
-
-    #ifdef DEBUG_OUTPUT
-    std::cout << __PRETTY_FUNCTION__ << " walker : " << walker.getCurrentElementNameStd() << std::endl;
-    #endif
 
     Tools::DomElementSiblingIterator jobIterator( walker );
 
@@ -724,7 +708,6 @@ Job::Spt DataModel::cloneJobWithFreqNear (unsigned int frequency)
     double   dTmp;
     size_t   sCount;
     Job::Spt clResult;
-    double   dSampleMax       = 0.0;
     double   dSampleMin       = 1.0E9;
     size_t   sIndex           = std::numeric_limits<std::size_t>::max ();
     size_t   sIndexSampleMax  = std::numeric_limits<std::size_t>::max ();
@@ -739,16 +722,11 @@ Job::Spt DataModel::cloneJobWithFreqNear (unsigned int frequency)
     }
     QMapIterator<double, unsigned int>qIter (qmapTemplateFreqs);
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] template sample freqs:" << qmapTemplateFreqs;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] searching for freq...:" << frequency;
-
     // search for job with next smaller sampling frequency
     qIter.toFront();
     while (qIter.hasNext())
     {
         qIter.next();
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] checking:" << frequency << "/" << qIter.key();
-
         if (qIter.key() <= ((double) frequency))
         {
             dSampleMin      = qIter.key  ();
@@ -756,27 +734,16 @@ Job::Spt DataModel::cloneJobWithFreqNear (unsigned int frequency)
         }
     }
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] template sample freqs:" << qmapTemplateFreqs;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] searching for freq...:" << frequency;
-
     // search for job with next bigger sampling frequency
     qIter.toBack();
     while (qIter.hasPrevious())
     {
         qIter.previous();
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] checking:" << frequency << "/" << qIter.key();
-
         if (qIter.key() >= ((double) frequency))
         {
-            dSampleMax      = qIter.key  ();
             sIndexSampleMax = qIter.value();
         }
     }
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] next smaller:" << dSampleMin;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] next smaller:" << sIndexSampleMin;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] next bigger.:" << dSampleMax;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] next bigger.:" << sIndexSampleMax;
 
     // check, if one of the found jobs fits 100% to sample frequency, if not,
     // choose next bigger one
@@ -827,14 +794,14 @@ void DataModel::updateJobList( const QDateTime & newStart )
         mJobListStartDateTime = newStart;
 
         // update all jobs of the joblist
-        UpdateJobData sAllJob = UpdateJobData (newStart, mAdjustToMinute, mAdjustMode);
+        UpdateJobData FsAllJob = UpdateJobData (newStart, mAdjustToMinute, mAdjustMode);
         std::vector<Job::Spt>::iterator iterJob;
 
         for (iterJob  = mJobList.begin();
              iterJob != mJobList.end  ();
              iterJob++)
         {
-            sAllJob (*iterJob);
+            FsAllJob (*iterJob);
         }
 
         // signal to all connected classes that job data has changed
@@ -885,7 +852,6 @@ void DataModel::shiftStartChanged (const QDateTime & newStart)
 void DataModel::setAdjustToMinute( bool adjustIt  )
 {
     mAdjustToMinute = adjustIt;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] was called before shiftStartChanged (...)";
     shiftStartChanged (this->getJoblistStartTimeLocalTime());
 }
 
@@ -925,9 +891,6 @@ void DataModel::saveFiles()
 
     // write ADUConf XML file
     QByteArray result   = mJobListDocument.toByteArray( 4 );
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] saving XML file:\n" << mJobListDocument.toString();
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] saving XML file:\n" << outFileName;
 
     QFile clOutFile;
     clOutFile.setFileName(outFileName);
@@ -1337,7 +1300,8 @@ QStringList DataModel::allowedSampleFreqs (void)
     }
 
     // sort vector
-    qSort (qvecSampleFreqs);
+    //qSort (qvecSampleFreqs);
+    std::sort (qvecSampleFreqs.begin(), qvecSampleFreqs.end());
 
     // create new sorted string list from vector
     qstrlTmp.clear();
@@ -1345,10 +1309,6 @@ QStringList DataModel::allowedSampleFreqs (void)
     {
         qstrlTmp.append(QString::number (qvecSampleFreqs.at (sEntryCount)));
     }
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] found sample freqs:" <<  qvecSampleFreqs;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] found sample freqs:" <<  qstrlTmp;
-
 
     return (qstrlTmp);
 }
@@ -1409,10 +1369,6 @@ QStringList DataModel::allowedSampleFreqs (const Types::Index& iIndex)
         qstrlTmp.append(QString::number (qvecSampleFreqs.at (sEntryCount)));
     }
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] found sample freqs:" <<  qvecSampleFreqs;
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] found sample freqs:" <<  qstrlTmp;
-
-
     return (qstrlTmp);
 }
 
@@ -1460,8 +1416,6 @@ QStringList DataModel::allowedRfFilterValuesAtChannel(Types::Index const& channe
     AdbBoardInfo::Spt boardInfo = mHardwareConfig -> getAdbBoardInfoForChannel( channelNumber );
 
     qstrlTmp = boardInfo.isNull() ? QStringList() : boardInfo -> getRfFilter();
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] allowed RF filter:" << qstrlTmp;
 
     return (qstrlTmp);
     
@@ -2000,10 +1954,6 @@ Job::Spt DataModel::getGuiSelectedJob()
     if ( selectionList.size() == 0 )
         return result; // nothing selected
 
-    #ifdef DEBUG_OUTPUT
-    qDebug()  << __PRETTY_FUNCTION__ << " selectionList[ 0 ].row(): " << selectionList[ 0 ].row();
-    #endif
-
     result = mJobList.at( selectionList[ 0 ].row() );
 
     return result;
@@ -2308,6 +2258,20 @@ bool DataModel::isADU09u10e(void)
 }
 
 
+bool DataModel::isADU11e5CHSTD(void)
+{
+    // declaration of variables
+    bool bRetValue = false;
+
+    if (this->mHardwareConfig.isNull() == false)
+    {
+        bRetValue = this->mHardwareConfig->isADU11e5CHSTD();
+    }
+
+    return (bRetValue);
+}
+
+
 double DataModel::getUTCLocalTimeOffset(void)
 {
     return (this->dUTCLocalTime);
@@ -2322,7 +2286,6 @@ bool DataModel::setUTCLocalTimeOffset(const double dNewUTCLocalTimeOffset)
     this->dUTCLocalTime = dNewUTCLocalTimeOffset;
 
     // update start-times in joblist according to new UTC to LocalTime offset
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] was called before shiftStartChanged (...)";
     this->shiftStartChanged(clActualStartDateTime);
 
     emit jobDataChanged();
@@ -2333,15 +2296,11 @@ bool DataModel::setUTCLocalTimeOffset(const double dNewUTCLocalTimeOffset)
 
 QDateTime DataModel::jobListStartDateTime() const
 {
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Joblist starttime:" << mJobListStartDateTime.toString();
-
     // declaration of variables
     QDateTime clStartDateTimeUTC;
     clStartDateTimeUTC.setTimeSpec(Qt::UTC);
 
     clStartDateTimeUTC = mJobListStartDateTime.addSecs( (qint64) (this->dUTCLocalTime * 3600));
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Joblist starttime:" << mJobListStartDateTime.toString();
 
     return (clStartDateTimeUTC);
 }
@@ -2372,8 +2331,6 @@ const QStringList DataModel::getAllowedSampleFreqsFromTemplate (void)
         qlTmp.append(qstrlRetValue[uiCounter].toDouble());
     }
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] native sample freqs:" << qlTmp;
-
     // now check for all sampling frequencies of all jobs of this joblist
     // and add them to the list.
     for (uiCounter = 0; uiCounter < this->jobCount(); uiCounter++)
@@ -2383,20 +2340,16 @@ const QStringList DataModel::getAllowedSampleFreqsFromTemplate (void)
         if (qlTmp.contains(dTmp) == false)
         {
             qlTmp.append(dTmp);
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] adding non native..:" << dTmp;
         }
     }
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] all valid freqs....:" << qlTmp;
-
     qstrlRetValue.clear();
-    qSort (qlTmp.begin(), qlTmp.end(), DefaultValues::aBiggerB);
+    //qSort (qlTmp.begin(), qlTmp.end(), DefaultValues::aBiggerB);
+    std::sort (qlTmp.begin(), qlTmp.end());
     for (uiCounter = 0; uiCounter < (unsigned int) qlTmp.size(); uiCounter++)
     {
         qstrlRetValue.append(QString::number (qlTmp[uiCounter], 'g', 9));
     }
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] all valid freqs....:" << qstrlRetValue;
 
     return (qstrlRetValue);
 }

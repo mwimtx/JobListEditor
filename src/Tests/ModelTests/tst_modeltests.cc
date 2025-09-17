@@ -45,7 +45,7 @@ ModelTests::ModelTests()
 
 void ModelTests::initTestCase()
 {
-    mTestDataDir = mTestDataDir.canonicalPath ();
+    mTestDataDir.setPath (mTestDataDir.canonicalPath ().toStdString().c_str());
     mDomDoc = QDomDocument("JobXml");
 }
 

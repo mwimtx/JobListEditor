@@ -313,13 +313,10 @@ SensorHwChannelUi& SensorHwChannelUi::setEnabled( bool enable )
 void SensorHwChannelUi::updateDisplay()
 {
     DataModel* data = mParent -> getDataModel();
-    if ( data == 0 )
+    if (data == 0)
+    {
         return;
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Input........:" << data -> getSensorHWSelectedInputAtChannel    (getChannelNumber());
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Channel Name.:" << data -> getSensorHWChannelTypeInputAtChannel (getChannelNumber());
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Sensor Type..:" << data -> getSensorHWSensorTypeInputAtChannel  (getChannelNumber());
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Sensor Serial:" << data -> getSensorHWSerialInputAtChannel      (getChannelNumber());
+    }
 
     mPbInput              -> setText( data -> getSensorHWSelectedInputAtChannel    ( getChannelNumber() ) );
     mPbChannelName        -> setText( data -> getSensorHWChannelTypeInputAtChannel ( getChannelNumber() ) );
@@ -357,10 +354,6 @@ void SensorHwChannelUi::handlePbInput()
     {
         return;
     }
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] channel number:" << getChannelNumber();
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] next value....:" << getNextValue (DefaultValues::SelectedInputVector(), data->getSensorHWSelectedInputAtChannel(getChannelNumber()));
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] actual value..:" << data->getSensorHWSelectedInputAtChannel(getChannelNumber());
 
     data->setSensorHWSelectedInputAtChannel (getChannelNumber(),
                                              getNextValue (DefaultValues::SelectedInputVector(),

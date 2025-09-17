@@ -41,7 +41,8 @@ geocoordinates::geocoordinates ( QObject *parent )
 }
 
 
-geocoordinates::geocoordinates(const geocoordinates &ma) {
+geocoordinates::geocoordinates(const geocoordinates &ma) : QObject ()
+{
     this->latitude = 0.0L;
     this->longitude =0.0L;
     this->eqradius = 0.0L;
@@ -185,7 +186,7 @@ void geocoordinates::set_lon_lat_rad (  long double rad_lon,  long double rad_la
   if ( ( tgk_meridian % 3 ) == 0 )
     this->gk_meridian = tgk_meridian;
   else
-    qWarning() << myfunc <<  "Gauss Krueger Merdian not valid, using auto calculation" << endl;
+    qWarning() << myfunc <<  "Gauss Krueger Merdian not valid, using auto calculation";
   if ( this->gk_meridian < 0 )
     this->gk_meridian += 360;
 

@@ -244,8 +244,6 @@ void TxmElectrodePos::updateGuiElements(void)
 
     if (this->mData != NULL)
     {
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: number of jobs loaded: " << QString::number (this->mData->jobCount());
-
         if (this->mData->jobCount() > 0)
         {
             this->mData->getTXMElectrodePosStr (C_TXM_ELECTRODE_CENTER, qstrLat, qstrLon, qstrElev);

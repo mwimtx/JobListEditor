@@ -52,6 +52,13 @@
 #define C_TEMPLATE_DIR_ADU10e      "./jle/System/Templates/Template_ADU-10e/ADUConf"
 #define C_TEMPLATE_NAME_ADU10e     " ADU-10e "
 
+/**
+ * defines the sub directory the ADU-102 mode Joblist template is
+ * located (ADU-11e 5-Channel und stndard inputs Ex, Ey, Hx, Hy and Hz).
+ */
+#define C_TEMPLATE_DIR_ADU11e_5CH_STD      "./jle/System/Templates/Template_ADU11e_5CH_STD/ADUConf"
+#define C_TEMPLATE_NAME_ADU11e_5CH_STD     " ADU-11e "
+
 
 namespace Ui {
     class MainWindow;
@@ -442,6 +449,11 @@ private:
      * Data Model contains the Template Joblist for ADU-10e board ADUs.
      */
     DataModel mJoblistTempl_ADU10e;
+
+    /**
+     * Data Model contains the Template Joblist for ADU-10e board ADUs.
+     */
+    DataModel mJoblistTempl_ADU11e_5CH_STD;
 
     /**
      * This flag is used to detect, if the CTRL key is pressed.

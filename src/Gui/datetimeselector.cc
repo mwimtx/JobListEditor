@@ -237,12 +237,6 @@ void DateTimeSelector::setStartMode(const QString& qstrStartMode)
         uiTmp  = floor (uiTmp / 86400);
         uiTmp *= uiTmp * 86400;
 
-        /*
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] Date is :" << this->getDateTime().date().year() << this->getDateTime().date().month() << this->getDateTime().date().day();
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] Date is :" << this->getDateTime().toTime_t();
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] Date is :" << uiTmp;
-        */
-
         if ((uiTmp == 0) && (iIndex == Types::StartModes::Adjusted))
         {
             ui->cbStartMode->setCurrentIndex (Types::StartModes::AdjustedToday);

@@ -364,9 +364,6 @@ void MainWindow::dropEvent(QDropEvent *event)
     }
 
     qstrFileName = urls[0].toLocalFile();
-    #ifdef DEBUG_OUTPUT
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] new path:" << qstrFileName;
-    #endif
 
     // show filename in window title
     qstrTmp  = BuildManifest::ApplicationName.c_str();
@@ -421,10 +418,6 @@ void MainWindow::openFile()
     {
         return;
     }
-
-    #ifdef DEBUG_OUTPUT
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] new path:" << qstrFileName;
-    #endif
 
     // show filename in window title
     qstrTmp  = BuildManifest::ApplicationName.c_str();
@@ -496,8 +489,6 @@ void MainWindow::saveFiles(const bool bShowFileDialog)
         {
             qstrFileName = mData.getJobListFileInfo().absoluteFilePath();
         }
-
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] new path:" << qstrFileName;
 
         qstrTmp  = BuildManifest::ApplicationName.c_str();
         qstrTmp += " - ";
@@ -602,10 +593,6 @@ void MainWindow::selectPreviousJob()
 
 void MainWindow::jobSelectionChanged( const QItemSelection &  , const QItemSelection & ) 
 {
-    // make a list of these?
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] date / time:" << this->mData.getJoblistStartTimeLocalTime().toString();
-
     bool enabled = ui -> jobListTableView -> selectionModel() -> hasSelection() ;
     ui -> deleteJobButton -> setEnabled( enabled );
     ui -> insertJobButton -> setEnabled( enabled );
@@ -622,8 +609,6 @@ void MainWindow::jobSelectionChanged( const QItemSelection &  , const QItemSelec
     {
         updateCSAMTStuff();
     }
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] date / time:" << this->mData.getJoblistStartTimeLocalTime().toString();
 
     return;
 }
@@ -870,9 +855,6 @@ Job::Spt MainWindow::createNewJob()
     // declaration of variables
     DataModel* pclTemplateData = NULL;
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] is hardware transmitter ?" << this->mData.isTXM();
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] is hardware MF board ADU?" << this->mData.isMF ();
-
     if (this->mData.isTXM() == true)
     {
         pclTemplateData = &this->mJoblistTempl_TXM;
@@ -897,7 +879,14 @@ Job::Spt MainWindow::createNewJob()
                 }
                 else
                 {
-                    pclTemplateData = &this->mJoblistTempl_LF_HF;
+                    if (this->mData.isADU11e5CHSTD() == true)
+                    {
+                        pclTemplateData = &this->mJoblistTempl_ADU11e_5CH_STD;
+                    }
+                    else
+                    {
+                        pclTemplateData = &this->mJoblistTempl_LF_HF;
+                    }
                 }
             }
         }
@@ -1206,7 +1195,6 @@ bool MainWindow::loadJobListTemplates(void)
         em.exec();
         bRetValue = false;
     }
-    */
 
     // try to load TXM template joblist
     if (this->loadJobListTemplates(C_TEMPLATE_DIR_TXM, this->mJoblistTempl_TXM) == false)
@@ -1219,6 +1207,7 @@ bool MainWindow::loadJobListTemplates(void)
         em.exec();
         bRetValue = false;
     }
+    */
 
     // try to load ADU-08e template joblist
     if (this->loadJobListTemplates(C_TEMPLATE_DIR_ADU08e_5BB, this->mJoblistTempl_ADU08eBB) == false)
@@ -1236,6 +1225,18 @@ bool MainWindow::loadJobListTemplates(void)
     if (this->loadJobListTemplates(C_TEMPLATE_DIR_ADU10e, this->mJoblistTempl_ADU10e) == false)
     {
         qstrTmp = tr(C_STRING_GUI_UNABLE_TO_OPEN_TEMPLATE).arg(C_TEMPLATE_DIR_ADU10e);
+        qDebug() << "[" << __PRETTY_FUNCTION__ << "] " << qstrTmp;
+        QErrorMessage em;
+        em.showMessage(qstrTmp);
+        em.resize(600, 300);
+        em.exec();
+        bRetValue = false;
+    }
+
+    // try to load ADU-11e template joblist - 5-CH standard inputs
+    if (this->loadJobListTemplates(C_TEMPLATE_DIR_ADU11e_5CH_STD, this->mJoblistTempl_ADU11e_5CH_STD) == false)
+    {
+        qstrTmp = tr(C_STRING_GUI_UNABLE_TO_OPEN_TEMPLATE).arg(C_TEMPLATE_DIR_ADU11e_5CH_STD);
         qDebug() << "[" << __PRETTY_FUNCTION__ << "] " << qstrTmp;
         QErrorMessage em;
         em.showMessage(qstrTmp);
@@ -1264,8 +1265,6 @@ void MainWindow::handleMoveJob1Up (void)
     int                  iActIndex = -1;
     QString              qstrTmp;
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "]: moving selected job 1 up";
-
     // get selected row in data model
     pclSelectionModel = ui->jobListTableView->selectionModel();
     clSelectionList   = pclSelectionModel->selectedRows     ();
@@ -1292,7 +1291,6 @@ void MainWindow::handleMoveJob1Up (void)
     if (iActIndex > 0)
     {
         // shift job
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: moving job at index " << iActIndex << " 1 up";
         (void) this->mData.swapJobPosition (iActIndex, (iActIndex - 1));
     }
     else
@@ -1332,8 +1330,6 @@ void MainWindow::handleMoveJob1Down (void)
     int                  iActIndex = -1;
     QString              qstrTmp;
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "]: moving selected job 1 down";
-
     // get selected row in data model
     pclSelectionModel = ui->jobListTableView->selectionModel();
     clSelectionList   = pclSelectionModel->selectedRows     ();
@@ -1361,7 +1357,6 @@ void MainWindow::handleMoveJob1Down (void)
         (iActIndex >= 0))
     {
         // shift job
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: moving job at index " << iActIndex << " 1 down";
         (void) this->mData.swapJobPosition (iActIndex, (iActIndex + 1));
     }
     else
@@ -1530,8 +1525,6 @@ void MainWindow::on_jobListTableView_doubleClicked (const QModelIndex& index)
     double      dTmp;
     ssize_t     sCount;
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] index" << index.column() << "/" << index.row() << "should be changed";
-
     if (index.column() == 0)
     {
         qstrlValidSampleFreqs = this->mData.allowedSampleFreqs(selectedJobRow());
@@ -1661,7 +1654,7 @@ void MainWindow::on_actionNewJoblist_triggered (void)
 
     qstrlValidGains.clear();
     //qstrlValidGains << C_TEMPLATE_NAME_LF_HF << C_TEMPLATE_NAME_MF << C_TEMPLATE_NAME_TXM << C_TEMPLATE_NAME_ADU08e;
-    qstrlValidGains << C_TEMPLATE_NAME_ADU07_5LF_5HF << C_TEMPLATE_NAME_ADU08e_5BB << C_TEMPLATE_NAME_ADU10e;
+    qstrlValidGains << C_TEMPLATE_NAME_ADU07_5LF_5HF << C_TEMPLATE_NAME_ADU08e_5BB << C_TEMPLATE_NAME_ADU10e << C_TEMPLATE_NAME_ADU11e_5CH_STD;
 
     FastButtonSelectPad* pclKeyPad = new FastButtonSelectPad (qstrlValidGains, C_STRING_GUI_CHOOSE_JOBLIST_TYPE, this, false);
     pclKeyPad->exec();
@@ -1707,6 +1700,14 @@ void MainWindow::on_actionNewJoblist_triggered (void)
                 if (this->exportJoblist(this->mJoblistTempl_ADU10e, qstrNewJoblistDir) == false)
                 {
                     qDebug () << "[" << __PRETTY_FUNCTION__ << "] failed to create ADU-10e joblist";
+                    bRetValue = false;
+                }
+            }
+            else if (pclKeyPad->qstrRetValue.indexOf(C_TEMPLATE_NAME_ADU11e_5CH_STD) != -1)
+            {
+                if (this->exportJoblist(this->mJoblistTempl_ADU11e_5CH_STD, qstrNewJoblistDir) == false)
+                {
+                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] failed to create ADU-11e 5-CH STD joblist";
                     bRetValue = false;
                 }
             }

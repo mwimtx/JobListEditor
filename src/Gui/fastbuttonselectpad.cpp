@@ -66,8 +66,6 @@ void FastButtonSelectPad::buildGui (void)
 
 void FastButtonSelectPad::buttonClicked (int iIndex)
 {
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] button was clicked:" << iIndex << "/" << this->qstrlButtons [iIndex];
-
     qstrRetValue   = this->qstrlButtons [iIndex];
     bValueSelected = true;
     this->close();

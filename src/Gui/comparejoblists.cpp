@@ -265,10 +265,10 @@ bool CompareJobLists::parseJoblist(DataModel*                pclJobList,
     unsigned int    uiStartTime;
     unsigned int    uiStartFirstJob;
     unsigned int    uiDuration;
-    unsigned int    uiLastStop;
+    unsigned int    uiLastStop = 0;
     unsigned int    uiSpacer;
     unsigned int    uiTmp;
-    unsigned int    uiStartTimeOffset;
+    unsigned int    uiStartTimeOffset = 0;
     QString         qstrTmp;
     QString         qstrTmp2;
     sJobAtttributes sTmp;

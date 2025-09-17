@@ -99,6 +99,7 @@ void Job::loadAndParseFile()
     if ( not file.open(QIODevice::ReadOnly) ) {        
         std::stringstream ss;
         ss << "unable to open file : [" << file.fileName().toStdString() << "] error message is : " << file.errorString().toStdString() << std::endl;
+        qDebug () << "unable to open file : [" << file.fileName().toStdString().c_str () << "] error message is : " << file.errorString().toStdString().c_str ();
         throw std::runtime_error( ss.str() );
     }
 
@@ -121,8 +122,6 @@ void Job::parseXML()
     parseComments();
     // we dont read calibration data till now!
 }
-
-
 
 struct JobChannelConfigFromDefault
 {
@@ -179,9 +178,6 @@ void Job::parseGeneric()
             .goToFirstChild( "start_date" );
         
         mStartDateElement = walker.get();
-        #ifdef DEBUG_OUTPUT
-        std::cout << __PRETTY_FUNCTION__ << "mStartTimeElement.text() " << mStartTimeElement.text().toStdString() << std::endl;
-        #endif
     }
 
     {
@@ -192,10 +188,6 @@ void Job::parseGeneric()
             .goToFirstChild( "stop_time" );
         
         mStopTimeElement = walker.get();
-
-        #ifdef DEBUG_OUTPUT
-        std::cout << __PRETTY_FUNCTION__ << "mStopTimeElement.text() " << mStopTimeElement.text().toStdString() << std::endl;
-        #endif
     }
 
     {
@@ -206,10 +198,6 @@ void Job::parseGeneric()
             .goToFirstChild( "stop_date" );
         
         mStopDateElement = walker.get();
-
-        #ifdef DEBUG_OUTPUT
-        std::cout << __PRETTY_FUNCTION__ << "mStopTimeElement.text() " << mStopTimeElement.text().toStdString() << std::endl;
-        #endif
     }
 
     {
@@ -252,20 +240,28 @@ void Job::parseGeneric()
 
     {
         QSharedPointer<Tools::DomElementWalker> pclWalker;
-
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] searching for meas_type - 1";
-
         this->goToATSWriterNode(this->mJobDocument, pclWalker, this->mDigFilType, this->mDigFilDecrate);
         pclWalker->goToFirstChild ("configuration");
         pclWalker->goToFirstChild ("meas_type");
-
-        qDebug () << "[" << __PRETTY_FUNCTION__ << "] searching for meas_type - 2";
-
         QString measType = pclWalker->get().text().trimmed();
 
-        mMeasurementMode = measType.compare( DefaultValues::CSAMT ) == 0 ?
-            ControlData::CSAMTMeasurementMode :
-            ControlData::NormalMeasurementMode ;
+        // bugfix for selecting mode - by default (no node available) it should default to
+        // AMT, not CSAMT
+        if (measType.size() < 3)
+        {
+            mMeasurementMode = ControlData::NormalMeasurementMode;
+        }
+        else
+        {
+            if (measType.compare(DefaultValues::CSAMT) == 0)
+            {
+                mMeasurementMode = ControlData::CSAMTMeasurementMode;
+            }
+            else
+            {
+                mMeasurementMode = ControlData::NormalMeasurementMode;
+            }
+        }
 
         pclWalker.clear();
     }
@@ -410,9 +406,6 @@ void Job::parseGeneric()
                 double dTmp;
 
                 dTmp = dNumIterations / dBaseFreq;
-
-                qDebug () << "[" << __PRETTY_FUNCTION__ << "] TXM job length:" << dTmp << "s";
-
                 dTmp = dTmp / (dNumDipoles * dDipTXTime);
                 dTmp = ceil (dTmp);
 
@@ -420,8 +413,6 @@ void Job::parseGeneric()
                 {
                     dTmp = 1.0;
                 }
-
-                qDebug () << "[" << __PRETTY_FUNCTION__ << "] TXM num stacks:" << dTmp;
 
                 this->mTXMNumStacks = QString::number (dTmp);
             }
@@ -457,8 +448,6 @@ void Job::parseGeneric()
                     }
                 }
             }
-
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] found polarisation angles:" << this->mTXMPolarisations;
         }
 
 
@@ -495,8 +484,6 @@ void Job::parseGeneric()
                     {
                         walker.goToFirstChild ("Latitude");
 
-                        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: center electrode latitude: " << walker.get().text();
-
                         this->qvecTXMElecPosLat [C_TXM_ELECTRODE_CENTER] = walker.get().text().trimmed().toInt(&bOK);
                         if (bOK == false)
                         {
@@ -506,8 +493,6 @@ void Job::parseGeneric()
 
                         walker.goToFirstChild ("Longitude");
 
-                        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: center electrode longitude: " << walker.get().text();
-
                         this->qvecTXMElecPosLon [C_TXM_ELECTRODE_CENTER] = walker.get().text().trimmed().toInt(&bOK);
                         if (bOK == false)
                         {
@@ -516,8 +501,6 @@ void Job::parseGeneric()
                         walker.goToParent();
 
                         walker.goToFirstChild ("Elevation");
-
-                        qDebug () << "[" << __PRETTY_FUNCTION__ << "]: center electrode elevation: " << walker.get().text();
 
                         this->qvecTXMElecPosElev [C_TXM_ELECTRODE_CENTER] = walker.get().text().trimmed().toInt(&bOK);
                         if (bOK == false)
@@ -797,8 +780,6 @@ void Job::parseComments()
              .goToFirstChild( "Cycle" );
 
             Tools::parseOptionalChildInto(w.get(), "BaseFrequency", mBaseFrequency);
-
-            qDebug() << "[" << __PRETTY_FUNCTION__ << "] reading TXM base frequency:" << mBaseFrequency;
         }
 
         {
@@ -1213,8 +1194,6 @@ void Job::updateTXMTags()
     dTmp  = this->mTXMDipTXTime.toDouble() * this->mTXMNumDipoles.toDouble() * this->mTXMNumStacks.toDouble();
     dTmp *= this->mTXMBaseFreq.toDouble();
     unsigned int uiTmp = (unsigned int) dTmp;
-
-    qDebug () << "Number of Iteration:" << dTmp << " / " << uiTmp;
 
     clWalker.get().firstChild().setNodeValue(QString::number(uiTmp));
 

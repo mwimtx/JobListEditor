@@ -243,8 +243,6 @@ void HardwareDB::setup()
     {
         mVersionString = "N/A";
     }
-
-    qDebug () << __PRETTY_FUNCTION__ << "HwDatabase Version:" << mVersionString;
 }
 
 HWDBQueryResult::Spt HardwareDB::query( const HWDBKeyData& hwQuery )
@@ -343,8 +341,6 @@ void HardwareConfig::setup()
         mVersionString = "N/A";
     }
 
-    qDebug () << __PRETTY_FUNCTION__ << "HwConfig Version:" << mVersionString;
-
     // init ADB boards from HwDatabase
     loadAdbBoards();
 
@@ -438,9 +434,6 @@ void HardwareConfig::createSensorInfoVector()
         HWDBQueryResult::Spt queryResult = (*it);
         if ( not queryResult -> hasId() ) 
         {
-            printf ("============>>>>>>>>>>>>>> 111111\n");
-            fflush (stdout);
-
             std::stringstream ss;
             ss << __PRETTY_FUNCTION__ << " unable to create hardware information for sensor \"" << (*it) -> getName().toStdString() << "\" without attribute id!";
             throw std::runtime_error( ss.str() );
@@ -451,10 +444,6 @@ void HardwareConfig::createSensorInfoVector()
         try {
             mSensorInfoVector.at( sensorInfo -> getChannelId() ) = sensorInfo;
         } catch ( const std::out_of_range& ) {
-
-            printf ("============>>>>>>>>>>>>>> 111111\n");
-            fflush (stdout);
-
             std::stringstream ss;
             ss << __PRETTY_FUNCTION__ << " channel id for \"" << (*it) -> getName().toStdString() << "\" seems to be out of range or invalid: [" << sensorInfo -> getChannelId() << "]";
             throw std::runtime_error( ss.str() );
@@ -493,8 +482,6 @@ void HardwareConfig::createAdbBoardInfoVector()
 
         AdbBoardInfo::Spt adbBoardInfo = AdbBoardInfoFactory::create( queryResult );
         adbBoardInfo -> parse();
-        
-        qDebug()  << __PRETTY_FUNCTION__ << " Name : " << adbBoardInfo -> getName() << " channel id : " << adbBoardInfo -> getChannelId();
 
         if (adbBoardInfo -> getChannelId() < mAdbBoardInfoVector.size())
         {
@@ -509,9 +496,6 @@ void HardwareConfig::createAdbBoardInfoVector()
             }
         }
     }
-
-    printf ("lalalalalala\n");
-
 }
 
 
@@ -653,6 +637,29 @@ bool HardwareConfig::isADU09u10e(void)
             if (it->isNull() == false)
             {
                 if ((((*it)->getGSM () == GMS_09) || ((*it)->getGSM () == GMS_10)) && ((*it)->getType () == ADB_ADU09U_10E))
+                {
+                    bRetValue = true;
+                }
+            }
+        }
+    }
+
+    return (bRetValue);
+}
+
+
+bool HardwareConfig::isADU11e5CHSTD(void)
+{
+    // declaration of variables
+    bool bRetValue = false;
+
+    if (mAdbBoardInfoVector.size() > 0)
+    {
+        for (AdbBoardInfoVector::iterator it = mAdbBoardInfoVector.begin(); it != mAdbBoardInfoVector.end(); ++it)
+        {
+            if (it->isNull() == false)
+            {
+                if (((*it)->getGSM () == GMS_11) && ((*it)->getType () == ADB_ADU11_BB))
                 {
                     bRetValue = true;
                 }

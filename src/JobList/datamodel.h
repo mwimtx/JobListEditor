@@ -269,6 +269,18 @@ public:
     bool isADU09u10e (void);
 
     /**
+     * \brief This function is used to check, if the joblist target hardware is a ADU-11e 5-CH standard setup.
+     *
+     * Just a wrapper for the implementation inside HwDatabase class.
+     *
+     * @param[out] const bool = true: target hardware is ADU-11e / false: target hardware is LF/HF board ADU
+     *
+     * \date 2025-09-11
+     * \author MWI
+     */
+    bool isADU11e5CHSTD (void);
+
+    /**
      * \brief This function is used to extract all valid sample frequencies for the boards of a certain job.
      *
      * This is a an overloaded version of the allowedSampleFreqs (void) function that will

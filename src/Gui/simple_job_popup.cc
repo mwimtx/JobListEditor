@@ -20,25 +20,18 @@ SimpleJobPopup::SimpleJobPopup(QStringList qstrlValidSampleFreqs, QWidget *paren
     ui->setupUi(this);
 
     // init list of sample frequencies
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Sample Frequenies:" << qstrlSampleFreqs;
-
     mFrequency = 0;
     ui->cbSampleFreq->clear           ();
     ui->cbSampleFreq->addItems        (qstrlSampleFreqs);
     ui->cbSampleFreq->setCurrentIndex (0);
     this->setFrequency();
 
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] Sample Frequenies:" << this->mFrequency;
-
-    QObject::connect (ui-> pb_accept     ,SIGNAL(clicked()), this, SLOT( accept() ) , Qt::UniqueConnection );
-    QObject::connect (ui-> pb_cancel     ,SIGNAL(clicked()), this, SLOT( reject() ) , Qt::UniqueConnection );
-
-    QObject::connect (ui->cbSampleFreq   ,SIGNAL(currentIndexChanged(int)), this, SLOT( setFrequency() ) , Qt::UniqueConnection );
-
-    QObject::connect (ui-> pb_duration_hour     ,SIGNAL(clicked()), this, SLOT( setDurationHour ()   ), Qt::UniqueConnection );
-    QObject::connect (ui-> pb_duration_minute   ,SIGNAL(clicked()), this, SLOT( setDurationMinute()  ), Qt::UniqueConnection );
-    QObject::connect (ui-> pb_duration_second   ,SIGNAL(clicked()), this, SLOT( setDurationSecond () ), Qt::UniqueConnection );
+    QObject::connect (ui-> pb_accept            ,SIGNAL(clicked()),                 this, SLOT( accept() ) ,            Qt::UniqueConnection );
+    QObject::connect (ui-> pb_cancel            ,SIGNAL(clicked()),                 this, SLOT( reject() ) ,            Qt::UniqueConnection );
+    QObject::connect (ui->cbSampleFreq          ,SIGNAL(currentIndexChanged(int)),  this, SLOT( setFrequency() ) ,      Qt::UniqueConnection );
+    QObject::connect (ui-> pb_duration_hour     ,SIGNAL(clicked()),                 this, SLOT( setDurationHour ()   ), Qt::UniqueConnection );
+    QObject::connect (ui-> pb_duration_minute   ,SIGNAL(clicked()),                 this, SLOT( setDurationMinute()  ), Qt::UniqueConnection );
+    QObject::connect (ui-> pb_duration_second   ,SIGNAL(clicked()),                 this, SLOT( setDurationSecond () ), Qt::UniqueConnection );
 
 }
 
@@ -114,8 +107,6 @@ void SimpleJobPopup::setDurationSecond ()
 
 void SimpleJobPopup::setFrequency()
 {
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] setting sample frequency" << ui->cbSampleFreq->currentText().toInt();
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] setting sample frequency" << ui->cbSampleFreq->currentText();
     mFrequency = ui->cbSampleFreq->currentText().toInt();
     this->ui->pb_accept->setFocus();
 

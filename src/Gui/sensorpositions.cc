@@ -287,8 +287,6 @@ void SensorPositions::handleBackButton()
 
 void SensorPositions::on_chbAdaptSensorSpacing_stateChanged (int)
 {
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] state changed";
-
     this->mData->setAdaptSensorSpacing(ui->chbAdaptSensorSpacing->isChecked());
 }
 

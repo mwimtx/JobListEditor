@@ -48,7 +48,6 @@
 
 #define C_STRING_GUI_FAILED_TO_CREATE_NEW_JOBLIST   "Failed to create new Joblist!"
 #define C_STRING_GUI_CHOOSE_JOBLIST_MODE            "Choose Joblist Mode"
-#define C_STRING_GUI_NO_JOBLIST_OPEN                "No Joblist open!"
 
 #define C_STRING_GUI_JOBLIST_SAVED                  "Joblist was saved to disk."
 #define C_STRING_GUI_SAVE_CHANGES                   "Save Changes?"

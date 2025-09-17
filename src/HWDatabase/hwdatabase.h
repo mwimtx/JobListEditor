@@ -38,6 +38,7 @@ enum t_AdbBoardTypes
     ADB_HF                          =  11,      ///< standard HF ADB board
     ADB_MF                          =  12,      ///< standard MF ADB board
     ADB_ADU08_BB                    =  13,      ///< standard ADU-08e BB board
+    ADB_ADU11_BB                    =  13,      ///< standard ADU-08e BB board
     ADB_ADU09U_10E                  =  14,      ///< standard ADU-09u/10e channels
     ADB_ARS2340                     =  21,      ///< ARS2340 drive for TXM-22
     ADB_ARS2360W                    =  22,      ///< ARS2360W drive for TXM-22
@@ -86,7 +87,8 @@ enum t_GmsVersions
     GMS_07      = 7,
     GMS_08      = 8,
     GMS_09      = 9,
-    GMS_10      = 10
+    GMS_10      = 10,
+    GMS_11      = 11
 };
 
 
@@ -321,6 +323,18 @@ public:
      */
     bool isADU09u10e (void);
 
+    /**
+     * \brief Checks, if the hardware config of the joblist is created for a ADU-11e board ADU with standard 5-CH setup.
+     *
+     * This function is used to check, if the hardware config, that belongs to this joblist
+     * was created on a ADU-10e machine.
+     *
+     * @param[out] const bool = true: joblist is meant to run on ADU-10e BB board ADU / false: is meant to run on LF/HF board ADU-07e
+     *
+     * \author MWI
+     * \date 2021-10-06
+     */
+    bool isADU11e5CHSTD (void);
 
 
     QDomElement getXMLHwConfigNode() const;

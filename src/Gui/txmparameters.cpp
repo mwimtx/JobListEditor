@@ -315,8 +315,6 @@ void txmparameters::updateChannelStatus()
 
     if (pclCurrentJob != NULL)
     {
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Waveform Name:" << pclCurrentJob->getTXMWaveformName();
-
         iIndex = ui->cbTXMWaveformName->findText(pclCurrentJob->getTXMWaveformName());
         if (iIndex >= 0)
         {
@@ -327,10 +325,8 @@ void txmparameters::updateChannelStatus()
             ui->cbTXMWaveformName->setCurrentIndex(0);
         }
 
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Waveform Amplitude:" << pclCurrentJob->getTXMMaxAmpl();
         ui->sspinTXMMaxAmpl->setValue(pclCurrentJob->getTXMMaxAmpl().toDouble());
 
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Waveform Base Freq:" << pclCurrentJob->getTXMBaseFreq();
         uiTmp = (unsigned int ) pclCurrentJob->getTXMBaseFreq().toDouble();
         iIndex = ui->cbTXMBaseFreq->findText(QString::number (uiTmp));
         if (iIndex >= 0)
@@ -342,13 +338,10 @@ void txmparameters::updateChannelStatus()
             ui->cbTXMWaveformName->setCurrentIndex(0);
         }
 
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Sequence Number Of Stacks:" << pclCurrentJob->getTXMNumStacks();
         ui->pbTXMNumStacks->setText(pclCurrentJob->getTXMNumStacks());
 
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Sequence Dipole TX Time:" << pclCurrentJob->getTXMDipTXTime();
         ui->pbTXMDipTXTime->setText(pclCurrentJob->getTXMDipTXTime());
 
-        qDebug() << "[" << __PRETTY_FUNCTION__ << "] Sequence Number Of Dipoles:" << pclCurrentJob->getTXMNumDipoles();
         iIndex = ui->cbTXMNumDipoles->findText(pclCurrentJob->getTXMNumDipoles());
         if (iIndex >= 0)
         {
@@ -406,8 +399,6 @@ void txmparameters::on_sspinTXMMaxAmpl_valueChanged(double dValue)
 {
     // get data for actually selected job
     QSharedPointer<Job> pclCurrentJob = this->mData->getSelectedJob();
-
-    qDebug () << "[" << __PRETTY_FUNCTION__ << "] new value:" << dValue;
 
     if (pclCurrentJob != NULL)
     {

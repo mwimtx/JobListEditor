@@ -897,16 +897,6 @@ void ImportAutoGainOffsetDialog::on_pbApply_clicked (int iIndex)
     {
         if (this->mData->getJobAt(uiCounter)->getLocked() == false)
         {
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "]  ====> job number" << uiCounter << "<====";
-
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] searching for smalles E-field radio filter ...";
-
-
-
-
-
-
-
             for (uiChannelCounter = 0; uiChannelCounter < this->mData->getJobAt(uiCounter)->getNumChannels(); uiChannelCounter++)
             {
                 if (this->mData->getJobAt(uiCounter)->getIsChannelEnabled(uiChannelCounter) == true)
@@ -957,9 +947,6 @@ void ImportAutoGainOffsetDialog::on_pbApply_clicked (int iIndex)
                 }
             }
 
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] LF board E-Field RF filters:" << qstrlLFBoardRFFilters;
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] MF board E-Field RF filters:" << qstrlMFBoardRFFilters;
-
             qmapLFBoardRFFilters.clear ();
             qmapMFBoardRFFilters.clear ();
 
@@ -972,9 +959,6 @@ void ImportAutoGainOffsetDialog::on_pbApply_clicked (int iIndex)
             {
                 qmapMFBoardRFFilters.insert (this->clRFFilterMapper.toVisual(qstrlMFBoardRFFilters [uiChannelNum]).toUInt (), qstrlMFBoardRFFilters [uiChannelNum]);
             }
-
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] LF board E-Field RF filters:" << qmapLFBoardRFFilters;
-            qDebug () << "[" << __PRETTY_FUNCTION__ << "] MF board E-Field RF filters:" << qmapMFBoardRFFilters;
 
             for (uiChannelCounter = 0; uiChannelCounter < this->mData->getJobAt(uiCounter)->getNumChannels(); uiChannelCounter++)
             {
@@ -993,14 +977,6 @@ void ImportAutoGainOffsetDialog::on_pbApply_clicked (int iIndex)
                     uiInput         = this->mData->getSensorHWSelectedInputAtChannel    (uiChannelID).toUInt();
                     qstrSensorType  = this->mData->getSensorHWSensorTypeInputAtChannel  (uiChannelID);
                     qstrChannelType = this->mData->getSensorHWChannelTypeInputAtChannel (uiChannelID);
-
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] channel number:" << uiChannelCounter;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] channel ID....:" << uiChannelID;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] board type....:" << qstrBoardType;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] filter type...:" << qstrFilterType;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] sensor type...:" << qstrSensorType;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] sensor type...:" << qstrChannelType;
-                    qDebug () << "[" << __PRETTY_FUNCTION__ << "] input.........:" << uiInput << "\n";
 
                     // now search for a fitting entry inside the AutoGain / AutoOffset vector
                     QList<unsigned int> clEntries = qmapEntriesToBeShown.values (iIndex);
