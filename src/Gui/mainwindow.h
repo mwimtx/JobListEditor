@@ -11,7 +11,7 @@
 
 
 // no automatic update of version number anymore - must be updated manually
-#define SVN_REVISION_STRING  "$Revision: 146 $"
+#define SVN_REVISION_STRING  "$Revision: 147 $"
 
 // constants and defines
 
